@@ -2,10 +2,11 @@ from abc import ABC, abstractmethod
 
 
 class AbstractFunction(ABC):
-    def __init__(self, arg_a: float, arg_b: float) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.a = arg_a
-        self.b = arg_b
+        self.a = 0
+        self.b = 0
+        self.c = '-'
 
     @abstractmethod
     def find(self, x: float) -> float:

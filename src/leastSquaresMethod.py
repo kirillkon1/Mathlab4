@@ -1,13 +1,13 @@
 import math
 
 from src.Functions.AbstractFunction import AbstractFunction
+from src.Functions.PolynomialFunction import LinearCrimerMethod, PolynomialFunction
 from src.Utils.Point import PointCollection
 
 
 def start(points: PointCollection, fun: AbstractFunction):
-
     if fun.getTitle() == 'PolynomialFunction':
-        return polynomial_start(points, fun)
+        return polynomial_start(points)
 
     sum_x = 0
     sum_y = 0
@@ -25,16 +25,44 @@ def start(points: PointCollection, fun: AbstractFunction):
     fun.setArg_b(b)
 
     e = 0
-    sum = 0
+    s = 0  # measure of deviation
 
     for point in points:
         e = point.y - fun.find(point.x)
-        sum += math.pow(e, 2)
+        s += math.pow(e, 2)
 
-    s = sum
-    deviation = math.sqrt(sum / len(points))
+    delta = math.sqrt(s / len(points))  # standard deviation
 
-    return fun, s, deviation, '-'
+    return fun, s, delta
 
-def polynomial_start(points: PointCollection, fun: AbstractFunction):
-    pass
+
+def polynomial_start(points: PointCollection):
+    sum_x = sum_x2 = sum_x3 = sum_x4 = sum_y = sum_x_y = sum_x2_y = 0
+
+    fun = PolynomialFunction()
+
+    for point in points:
+        sum_x += point.x
+        sum_x2 += point.x ** 2
+        sum_x3 += point.x ** 3
+        sum_x4 += point.x ** 4
+        sum_y += point.y
+        sum_x_y += point.x * point.y
+        sum_x2_y += point.x ** 2 * point.y
+
+    c, b, a = LinearCrimerMethod(sum_x, sum_x2, sum_x3, sum_x4, sum_y, sum_x_y, sum_x2_y, len(points))
+
+    fun.setArg_a(a)
+    fun.setArg_b(b)
+    fun.setArg_c(c)
+
+    e = 0
+    s = 0  # measure of deviation
+
+    for point in points:
+        e = point.y - fun.find(point.x)
+        s += math.pow(e, 2)
+
+    delta = math.sqrt(s / len(points))  # standard deviation
+
+    return fun, s, delta

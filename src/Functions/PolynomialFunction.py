@@ -1,6 +1,7 @@
 import numpy as np
 
 from src.Functions.AbstractFunction import AbstractFunction
+from src.Utils.Utils import get_determinant
 
 
 class PolynomialFunction(AbstractFunction):
@@ -8,9 +9,9 @@ class PolynomialFunction(AbstractFunction):
     def getTitle(self) -> str:
         return 'PolynomialFunction'
 
-    def __init__(self, arg_a: float, arg_b: float, arg_c: float) -> None:
-        super().__init__(arg_a, arg_b)
-        self.c = arg_c
+    def __init__(self) -> None:
+        super().__init__()
+        self.c = 0
 
     def find(self, x: float) -> float:
         return self.a * pow(x, 2) + self.b * x + self.c
@@ -21,9 +22,9 @@ class PolynomialFunction(AbstractFunction):
     def getStringFunction(self) -> str:
         return f'{self.a}*x^2 + {self.b}x + {self.c}'
 
+    def CrimerMethod(self, sum_x, sum_y, sum_sq_x, sum_x_y, n: int):
+        return 0
 
-    def CrimerMethod(sum_x, sum_y, sum_sq_x, sum_x_y, n: int):
-        pass
 
 def __getPirsonConst(points: list):
     mean_x = __meanX(points)
@@ -54,3 +55,30 @@ def __meanY(points: list) -> float:
         sum += float(point.__getattribute__('y'))
 
     return sum / len(points)
+
+
+'''
+        ( n       sum_x   sum_x2 | sum_y    )
+        ( sum_x   sum_x2  sum_x3 | sum_x_y  )
+        ( sum_x2  sum_x3  sum_x4 | sum_x2_y )
+'''
+
+
+def LinearCrimerMethod(sum_x, sum_x2, sum_x3, sum_x4, sum_y, sum_x_y, sum_x2_y, n):
+    delta = get_determinant(n, sum_x, sum_x2,
+                            sum_x, sum_x2, sum_x3,
+                            sum_x2, sum_x3, sum_x4)
+
+    delta1 = get_determinant(sum_y, sum_x, sum_x2,
+                             sum_x_y, sum_x2, sum_x3,
+                             sum_x2_y, sum_x3, sum_x4)
+
+    delta2 = get_determinant(n, sum_y, sum_x2,
+                             sum_x, sum_x_y, sum_x3,
+                             sum_x2, sum_x2_y, sum_x4)
+
+    delta3 = get_determinant(n, sum_x, sum_y,
+                             sum_x, sum_x2, sum_x_y,
+                             sum_x2, sum_x3, sum_x2_y)
+
+    return delta1 / delta, delta2 / delta, delta3 / delta
