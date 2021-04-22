@@ -6,35 +6,42 @@ from src.Utils.Point import PointCollection
 
 
 def start(points: PointCollection, fun: AbstractFunction):
-    if fun.getTitle() == 'PolynomialFunction':
-        return polynomial_start(points)
+    try:
+        if fun.getTitle() == 'PolynomialFunction':
+            return polynomial_start(points)
 
-    sum_x = 0
-    sum_y = 0
-    sum_sq_x = 0
-    sum_x_y = 0
+        sum_x = 0
+        sum_y = 0
+        sum_sq_x = 0
+        sum_x_y = 0
 
-    for point in points:
-        sum_x += point.x
-        sum_y += point.y
-        sum_sq_x += point.x ** 2
-        sum_x_y += point.y * point.x
+        for point in points:
+            sum_x += point.x
+            sum_y += point.y
+            sum_sq_x += point.x ** 2
+            sum_x_y += point.y * point.x
 
-    a, b = fun.CrimerMethod(sum_x, sum_y, sum_sq_x, sum_x_y, len(points))
-    fun.setArg_a(a)
-    fun.setArg_b(b)
+        a, b = fun.CrimerMethod(sum_x, sum_y, sum_sq_x, sum_x_y, len(points))
+        fun.setArg_a(a)
+        fun.setArg_b(b)
 
-    e = 0
-    s = 0  # measure of deviation
+        e = 0
+        s = 0  # measure of deviation
 
-    for point in points:
-        e = point.y - fun.find(point.x)
-        s += math.pow(e, 2)
+        for point in points:
+            e = point.y - fun.find(point.x)
+            s += math.pow(e, 2)
 
-    delta = math.sqrt(s / len(points))  # standard deviation
+        delta = math.sqrt(s / len(points))  # standard deviation
 
-    return fun, s, delta
+        if delta > 10000000000:
+            raise Exception
 
+        return fun, s, delta
+    except Exception:
+        fun.setArg_a('a')
+        fun.setArg_b('b')
+        return fun, 'ERR', 'ERR'
 
 def polynomial_start(points: PointCollection):
     sum_x = sum_x2 = sum_x3 = sum_x4 = sum_y = sum_x_y = sum_x2_y = 0

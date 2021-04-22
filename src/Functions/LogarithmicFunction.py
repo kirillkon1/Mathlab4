@@ -1,15 +1,18 @@
-import math
+import numpy as np
 
 from src.Functions.AbstractFunction import AbstractFunction
+from src.Utils.Utils import toFixed
 
 
 class LogarithmicFunction(AbstractFunction):
+
+    color = "dodgerblue"
 
     def getTitle(self) -> str:
         return 'LogarithmicFunction'
 
     def find(self, x: float) -> float:
-        return self.a * math.log(x) + self.b
+        return self.a * np.log(x) + self.b
 
     def getStringFunction(self) -> str:
-        return f'{self.a}*ln(x) + {self.b}'
+        return f'{toFixed(self.a)}*ln(x) + {toFixed(self.b)}'

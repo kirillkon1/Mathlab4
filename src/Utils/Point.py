@@ -1,3 +1,6 @@
+from typing import Type
+
+
 class Point:
 
     def __init__(self, coordinate_x: float, coordinate_y: float) -> None:

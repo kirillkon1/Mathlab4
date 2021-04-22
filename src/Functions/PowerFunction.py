@@ -1,7 +1,10 @@
 from src.Functions.AbstractFunction import AbstractFunction
+from src.Utils.Utils import toFixed
 
 
 class PowerFunction(AbstractFunction):
+
+    color = "springgreen"
 
     def getTitle(self) -> str:
         return 'PowerFunction'
@@ -10,4 +13,4 @@ class PowerFunction(AbstractFunction):
         return self.a * pow(x, self.b)
 
     def getStringFunction(self) -> str:
-        return f'{self.a} * x^{self.b}'
+        return f'{toFixed(self.a)} * x^{toFixed(self.b)}'

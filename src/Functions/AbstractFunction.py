@@ -2,10 +2,12 @@ from abc import ABC, abstractmethod
 
 
 class AbstractFunction(ABC):
+    color = "white"  # not used
+
     def __init__(self) -> None:
         super().__init__()
-        self.a = 0
-        self.b = 0
+        self.a = '-'
+        self.b = '-'
         self.c = '-'
 
     @abstractmethod
@@ -14,7 +16,7 @@ class AbstractFunction(ABC):
 
     @abstractmethod
     def getTitle(self) -> str:
-        return "AbstractFunction"
+        pass
 
     @abstractmethod
     def getStringFunction(self) -> str:

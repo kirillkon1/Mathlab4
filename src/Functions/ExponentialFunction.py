@@ -1,9 +1,15 @@
 import math
 
 from src.Functions.AbstractFunction import AbstractFunction
+from src.Utils.Utils import toFixed
 
 
 class ExponentialFunction(AbstractFunction):
+
+    color = '#orangered'
+
+    def __init__(self) -> None:
+        super().__init__()
 
     def getTitle(self) -> str:
         return 'ExponentialFunction'
@@ -12,4 +18,4 @@ class ExponentialFunction(AbstractFunction):
         return self.a * pow(math.e, self.b * x)
 
     def getStringFunction(self) -> str:
-        return f'{self.a}*e^{self.b}x'
+        return f'{toFixed(self.a)}*e^{toFixed(self.b)}x'
