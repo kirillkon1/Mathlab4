@@ -6,8 +6,6 @@ from src.Utils.Utils import toFixed
 
 class LogarithmicFunction(AbstractFunction):
 
-    color = "dodgerblue"
-
     def getTitle(self) -> str:
         return 'LogarithmicFunction'
 

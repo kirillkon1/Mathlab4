@@ -1,12 +1,8 @@
-import numpy as np
-
 from src.Functions.AbstractFunction import AbstractFunction
 from src.Utils.Utils import get_determinant, toFixed
 
 
 class PolynomialFunction(AbstractFunction):
-
-    color = "violet"
 
     def getTitle(self) -> str:
         return 'PolynomialFunction'
@@ -22,12 +18,10 @@ class PolynomialFunction(AbstractFunction):
         self.c = arg_c
 
     def getStringFunction(self) -> str:
-        return f'{toFixed(self.a)}*x^2 + {toFixed(self.b)}x + {toFixed(self.c)}'
+        return f'{toFixed(self.a, 5)}*x^2 + {toFixed(self.b)}x + {toFixed(self.c)}'
 
     def CrimerMethod(self, sum_x, sum_y, sum_sq_x, sum_x_y, n: int):
         return 0
-
-
 
 
 '''

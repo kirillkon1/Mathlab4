@@ -15,6 +15,8 @@ def readPoint(file_name: str) -> PointCollection:
             points = line.split()
             if len(points) != 2:
                 continue
+            if points[0] == "0":
+                continue
             point: Point = Point(float(points[0]), float(points[1]))
             pointlist.append(point)
         except Exception:
@@ -30,6 +32,7 @@ def toFixed(numObj, digits=2):
         return f"{numObj:.{digits}f}"
     except Exception:
         return numObj
+
 
 def getMin_Max_of_points(points: PointCollection):
     point = points[0]

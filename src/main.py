@@ -27,10 +27,11 @@ if __name__ == "__main__":
     # -----------------------------------------------------
 
     answer = []
-    min_deviation = 10000000000000000000000  # минимальное отклонение
+    min_deviation = 100000  # минимальное отклонение
 
     funcs = []
 
+    # -----Вывод ответа-------
     for tmp_fun in functions:
 
         fun, measure_of_deviation, standard_deviation = start(points_list, tmp_fun)
@@ -41,7 +42,7 @@ if __name__ == "__main__":
 
         if measure_of_deviation == 'ERR':
             continue
-        if measure_of_deviation < 2000:
+        if standard_deviation < 200:
             funcs.append(fun)
         if min_deviation > standard_deviation:
             min_deviation = standard_deviation
@@ -50,8 +51,17 @@ if __name__ == "__main__":
     for i in answer:
         print(i)
 
-    print(f'\nНаиболее подходящая функция: {necessary_function.getTitle()} : ',  necessary_function.getStringFunction())
+    print(f'\nНаиболее подходящая функция: {necessary_function.getTitle()} : ', necessary_function.getStringFunction())
     print(f"со средним квадратичным отклонением {toFixed(standard_deviation)}")
     if necessary_function.getTitle() == 'LinearFunction':
         print(f"Коэффициент корреляции = {getPirsonConst(points_list)}")
+
+    # -----Отрисовка графиков-------
+    print("На графике функции: ", end='')
+    for i in funcs:
+        print(i.getTitle(), end=' ')
+    print()
+    drawFunction(points_list, funcs)
+    funcs.clear()
+    funcs.append(necessary_function)
     drawFunction(points_list, funcs)

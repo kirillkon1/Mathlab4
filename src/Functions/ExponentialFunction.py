@@ -6,8 +6,6 @@ from src.Utils.Utils import toFixed
 
 class ExponentialFunction(AbstractFunction):
 
-    color = '#orangered'
-
     def __init__(self) -> None:
         super().__init__()
 

@@ -4,8 +4,6 @@ from src.Utils.Utils import toFixed
 
 class PowerFunction(AbstractFunction):
 
-    color = "springgreen"
-
     def getTitle(self) -> str:
         return 'PowerFunction'
 

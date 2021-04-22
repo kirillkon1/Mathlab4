@@ -1,6 +1,7 @@
 import math
 
 from src.Functions.AbstractFunction import AbstractFunction
+from src.Functions.LinearFunction import LinearFunction, getPirsonConst
 from src.Functions.PolynomialFunction import LinearCrimerMethod, PolynomialFunction
 from src.Utils.Point import PointCollection
 
@@ -20,8 +21,10 @@ def start(points: PointCollection, fun: AbstractFunction):
             sum_y += point.y
             sum_sq_x += point.x ** 2
             sum_x_y += point.y * point.x
-
-        a, b = fun.CrimerMethod(sum_x, sum_y, sum_sq_x, sum_x_y, len(points))
+        if fun.getTitle() != "ExponentialFunction":
+            a, b = fun.CrimerMethod(sum_x, sum_y, sum_sq_x, sum_x_y, len(points))
+        else:
+            b, a = fun.CrimerMethod(sum_x, sum_y, sum_sq_x, sum_x_y, len(points))
         fun.setArg_a(a)
         fun.setArg_b(b)
 
@@ -43,6 +46,7 @@ def start(points: PointCollection, fun: AbstractFunction):
         fun.setArg_b('b')
         return fun, 'ERR', 'ERR'
 
+
 def polynomial_start(points: PointCollection):
     sum_x = sum_x2 = sum_x3 = sum_x4 = sum_y = sum_x_y = sum_x2_y = 0
 
@@ -62,6 +66,11 @@ def polynomial_start(points: PointCollection):
     fun.setArg_a(a)
     fun.setArg_b(b)
     fun.setArg_c(c)
+
+    # if getPirsonConst(points) > 0.9:
+    #     fun = LinearFunction()
+    #     fun.a = b
+    #     fun.b = c
 
     e = 0
     s = 0  # measure of deviation
