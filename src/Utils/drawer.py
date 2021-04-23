@@ -1,4 +1,3 @@
-from src.Functions import AbstractFunction
 from src.Utils.Point import PointCollection
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,11 +6,8 @@ from src.Utils.Utils import getMin_Max_of_points
 
 
 def drawFunction(points: PointCollection, funcs):
-    # print('На графике:\n')
     for fun in funcs:
         min, max = getMin_Max_of_points(points)
-
-        # print(fun.__getattribute__('color'), " -> ", fun.getStringFunction())
 
         X = np.linspace(min - 1, max + 1, len(points) ** 2)
         Y = fun.find(X)

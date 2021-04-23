@@ -5,6 +5,8 @@ from src.Functions.LinearFunction import LinearFunction, getPirsonConst
 from src.Functions.PolynomialFunction import LinearCrimerMethod, PolynomialFunction
 from src.Utils.Point import PointCollection
 
+"""Нахождение функции методотом наименьших квадратов"""
+
 
 def start(points: PointCollection, fun: AbstractFunction):
     try:
@@ -45,6 +47,9 @@ def start(points: PointCollection, fun: AbstractFunction):
         fun.setArg_a('a')
         fun.setArg_b('b')
         return fun, 'ERR', 'ERR'
+
+
+"""Нахождение функции методотом наименьших квадратов для полиномиальной функции"""
 
 
 def polynomial_start(points: PointCollection):
