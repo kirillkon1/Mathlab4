@@ -7,6 +7,7 @@ from src.Functions.AbstractFunction import AbstractFunction
 from src.Utils.Point import Point, PointCollection
 
 
+# чтение из файла
 def readPoint(file_name: str) -> PointCollection:
     file = open(file_name, 'r')
     pointlist = PointCollection()
@@ -27,6 +28,7 @@ def readPoint(file_name: str) -> PointCollection:
     return pointlist
 
 
+# Устанавливает кол-во знаков после запятой
 def toFixed(numObj, digits=2):
     try:
         return f"{numObj:.{digits}f}"

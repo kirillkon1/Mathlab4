@@ -24,7 +24,8 @@ class PolynomialFunction(AbstractFunction):
         return 0
 
 
-'''
+'''     
+Решатель системы методом Крамера
         ( n       sum_x   sum_x2 | sum_y    )
         ( sum_x   sum_x2  sum_x3 | sum_x_y  )
         ( sum_x2  sum_x3  sum_x4 | sum_x2_y )

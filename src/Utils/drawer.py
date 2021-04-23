@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from src.Utils.Utils import getMin_Max_of_points
 
-
+# метод для отрисовки графика(-ов)
 def drawFunction(points: PointCollection, funcs):
     for fun in funcs:
         min, max = getMin_Max_of_points(points)
