@@ -13,4 +13,4 @@ class LogarithmicFunction(AbstractFunction):
         return self.a * np.log(x) + self.b
 
     def getStringFunction(self) -> str:
-        return f'{toFixed(self.a)}*ln(x) + {toFixed(self.b)}'
+        return f'{toFixed(self.a, 20)}*ln(x) + {toFixed(self.b)}'

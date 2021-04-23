@@ -16,7 +16,7 @@ class LinearFunction(AbstractFunction):
         return self.a * x + self.b
 
     def getStringFunction(self) -> str:
-        return f'{toFixed(self.a)}*x^{toFixed(self.b)}'
+        return f'{toFixed(self.a, 5)} * x + {toFixed(self.b, 5)}'
 
 
 def getPirsonConst(points: list):

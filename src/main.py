@@ -34,22 +34,23 @@ if __name__ == "__main__":
     # -----Вывод ответа-------
     for tmp_fun in functions:
 
+        # fun - функция, measure_of_deviation - мера отклонения, standard_deviation - cреднеквадратичное отклонение
         fun, measure_of_deviation, standard_deviation = start(points_list, tmp_fun)
 
-        tmp_answer = Answer(fun, measure_of_deviation, standard_deviation)
-
-        answer.append(tmp_answer)
+        answer.append(Answer(fun, measure_of_deviation, standard_deviation))  # Записываю ответ
 
         if measure_of_deviation == 'ERR':
             continue
         if standard_deviation < 200:
             funcs.append(fun)
+
         if min_deviation > standard_deviation:
             min_deviation = standard_deviation
             necessary_function: AbstractFunction = fun
 
-    for i in answer:
-        print(i)
+    # --Вывод ответов в консоль--
+    for one_answer in answer:
+        print(one_answer)
 
     print(f'\nНаиболее подходящая функция: {necessary_function.getTitle()} : ', necessary_function.getStringFunction())
     print(f"со средним квадратичным отклонением {toFixed(standard_deviation)}")

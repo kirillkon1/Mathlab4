@@ -27,9 +27,14 @@ class AbstractFunction(ABC):
     def setArg_b(self, arg_b):
         self.b = arg_b
 
-    def CrimerMethod(self, sum_x, sum_y, sum_sq_x, sum_x_y, n: int):
-        delta = sum_sq_x * n - sum_x * sum_x
-        delta1 = sum_x_y * n - sum_x * sum_y
-        delta2 = sum_sq_x * sum_y - sum_x * sum_x_y
 
-        return delta1 / delta, delta2 / delta
+    """
+       (a     b    |    c  )
+       (d     e    |    f  )
+    """
+def CrimerMethod(a: float, b: float, c: float, d: float, e: float, f: float):
+    delta = a * e - b * d
+    delta1 = c * e - b * f
+    delta2 = a * f - d * c
+
+    return delta1 / delta, delta2 / delta
