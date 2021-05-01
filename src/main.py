@@ -37,10 +37,10 @@ if __name__ == "__main__":
         # fun - функция, measure_of_deviation - мера отклонения, standard_deviation - cреднеквадратичное отклонение
         fun, measure_of_deviation, standard_deviation = start(points_list, tmp_fun)
 
-        answer.append(Answer(fun, measure_of_deviation, standard_deviation))  # Записываю ответ
-
         if measure_of_deviation == 'ERR':
             continue
+        else:
+            answer.append(Answer(fun, measure_of_deviation, standard_deviation))  # Записываю ответ
         if standard_deviation < 200:
             funcs.append(fun)
 

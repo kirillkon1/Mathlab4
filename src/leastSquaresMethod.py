@@ -1,8 +1,7 @@
 import math
 
-from src.Functions.AbstractFunction import AbstractFunction, CrimerMethod
-from src.Functions.LinearFunction import LinearFunction, getPirsonConst
-from src.Functions.PolynomialFunction import LinearCrimerMethod, PolynomialFunction
+from src.Functions.AbstractFunction import AbstractFunction, find_by_Crimer_method, find_Crimer_method_by_third_matrix
+from src.Functions.PolynomialFunction import PolynomialFunction
 from src.Utils.Point import PointCollection
 
 """Нахождение аппроксимирующей функции методотом наименьших квадратов"""
@@ -60,7 +59,7 @@ def polynomial_start(points: PointCollection):
         sum_x_y += point.x * point.y
         sum_x2_y += point.x ** 2 * point.y
 
-    c, b, a = LinearCrimerMethod(sum_x, sum_x2, sum_x3, sum_x4, sum_y, sum_x_y, sum_x2_y, len(points))
+    c, b, a = find_Crimer_method_by_third_matrix(sum_x, sum_x2, sum_x3, sum_x4, sum_y, sum_x_y, sum_x2_y, len(points))
 
     fun.setArg_a(a)
     fun.setArg_b(b)
@@ -87,7 +86,7 @@ def __linear_approximation(points: PointCollection):
         sum_sq_x += point.x ** 2
         sum_x_y += point.y * point.x
 
-    a, b = CrimerMethod(sum_sq_x, sum_x, sum_x_y, sum_x, len(points), sum_y)  # Формулу взял из лекции
+    a, b = find_by_Crimer_method(sum_sq_x, sum_x, sum_x_y, sum_x, len(points), sum_y)  # Формулу взял из лекции
     return a, b
 
 
@@ -100,7 +99,7 @@ def __logarithmic_approximation(points: PointCollection):
         sum_y += point.y
         sum_lnx_y += point.y * math.log(point.x)
 
-    b, a = CrimerMethod(len(points), sum_lnx, sum_y, sum_lnx, sum_lnx2, sum_lnx_y)  # a + b * ln(x)
+    b, a = find_by_Crimer_method(len(points), sum_lnx, sum_y, sum_lnx, sum_lnx2, sum_lnx_y)  # a + b * ln(x)
     return a, b
 
 
@@ -113,7 +112,7 @@ def __exponential_approximation(points: PointCollection):
         sum_lny += math.log(point.y)
         sum_x_lny += math.log(point.y) * point.x
 
-    a, b = CrimerMethod(len(points), sum_x, sum_lny, sum_x, sum_x2, sum_x_lny)
+    a, b = find_by_Crimer_method(len(points), sum_x, sum_lny, sum_x, sum_x2, sum_x_lny)
     a = pow(math.e, a)
     return a, b
 
@@ -128,6 +127,6 @@ def __power_approximation(points: PointCollection):
         sum_lnx2 += math.log(point.x) ** 2
         sum_lnx_lny += math.log(point.x) * math.log(point.y)
 
-    a, b = CrimerMethod(n, sum_lnx, sum_lny, sum_lnx, sum_lnx2, sum_lnx_lny)
+    a, b = find_by_Crimer_method(n, sum_lnx, sum_lny, sum_lnx, sum_lnx2, sum_lnx_lny)
     a = pow(math.e, a)
     return a, b

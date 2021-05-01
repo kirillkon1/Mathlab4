@@ -16,8 +16,8 @@ def readPoint(file_name: str) -> PointCollection:
             points = line.split()
             if len(points) != 2:
                 continue
-            if points[0] == "0":
-                continue
+            # if points[0] == "0":
+            #     continue
             point: Point = Point(float(points[0]), float(points[1]))
             pointlist.append(point)
         except Exception:
@@ -46,19 +46,6 @@ def getMin_Max_of_points(points: PointCollection):
             min = point.x
 
     return min, max
-
-
-'''
-    метод для нахождение детерминанта 
-    
-    | a  b  c |
-    | d  e  f | = -i * b * d + b * f * g + c * d * h - a * f * h + i * a * e - c * g * e
-    | g  h  i |
-'''
-
-
-def get_determinant(a, b, c, d, e, f, g, h, i):
-    return -i * b * d + b * f * g + c * d * h - a * f * h + i * a * e - c * g * e
 
 
 '''Чем ближе значение 𝑅^2 к единице (𝑅^2 → 1), тем надежнее
